@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=yard_store
+      - POSTGRES_USER=josmanvaljav
+      - POSTGRES_PASSWORD=josmanvaljav
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata_vol:/var/lib/postgresql/data
+# docker volume create --name=pgdata_vol
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=josmanvaljav@email.com
+      - PGADMIN_DEFAULT_PASSWORD=josmanvaljav
+    ports:
+      - 5050:80
+
+  mysql:
+    image: mysql:5
+    environment:
+      - MYSQL_DATABASE=yard_store
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=josmanvaljav
+      - MYSQL_PORT=3306
+    ports:
+      - 3306:3306
+    volumes:
+      - mysqldata_vol:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=josmanvaljav
+      - PMA_HOST=mysql
+    ports:
+      - 8080:80
+
+volumes:
+    pgdata_vol:
+      # external: true
+    mysqldata_vol:
