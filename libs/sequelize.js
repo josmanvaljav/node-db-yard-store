@@ -13,17 +13,19 @@ const options = {
   logging: config.isProd ? false : true,
 };
 
-let URI = "";
+// let URI = "";
+const URI = config.dbUrl;
 if (config.isProd) {
-  URI = config.dbUrlProd;
+  // URI = config.dbUrlProd;
   options.dialectOptions = {
     ssl: {
       rejectUnauthorized: false
     }
   }
-} else {
-  URI = config.dbUrl;
 }
+// else {
+//   URI = config.dbUrl;
+// }
 
 const sequelize = new Sequelize(URI, options);
 

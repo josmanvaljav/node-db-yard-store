@@ -28,20 +28,20 @@ const OrderSchema = {
     onDelete: "SET NULL",
   },
   // Calculated field, just recomende for short amount of records. Instead use a Database query
-  // total: {
-  //   type: DataTypes.VIRTUAL,
-  //   get() {
-  //     if (this.products) {
-  //       if (this.products.length > 0) {
-  //         return this.products.reduce((total, item) => {
-  //           return total + (item.price * item.OrderProduct.amount);
-  //         }, 0);
-  //       }
-  //     } else {
-  //       return null;
-  //     }
-  //   }
-  // },
+  total: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      if (this.products) {
+        if (this.products.length > 0) {
+          return this.products.reduce((total, item) => {
+            return total + (item.price * item.OrderProduct.amount);
+          }, 0);
+        }
+      } else {
+        return null;
+      }
+    }
+  },
 };
 
 class Order extends Model {
